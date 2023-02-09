@@ -1,0 +1,29 @@
+<% layout("layouts/main") %>
+<%~ includeFile("partials/nav", it)  %>
+
+
+<link rel="stylesheet" href="../static/css/auth.css">
+
+<!-- Main -->
+<main class="container">
+    <article class="grid">
+        <div>
+            <hgroup>
+                <h1>Sign in</h1>
+                <h2>Just remember u password, ok?</h2>
+            </hgroup>
+            <form method="post" action="/login">
+                <%~ includeFile("partials/node_selector") %>
+
+                <input type="text" name="nick" placeholder="Nick" aria-label="Nick" autocomplete="login" required>
+                <input type="email" name="email" placeholder="Email" aria-label="Email" autocomplete="email" required>
+                <input type="password" name="password" placeholder="Password" aria-label="Password" autocomplete="password" required>
+                <input type="hidden" name="_csrf" value="<%= it.token %>"  required>
+
+                <button type="submit" class="contrast">Login</button>
+            </form>
+        </div>
+        <div></div>
+    </article>
+</main>
+<!-- ./ Main -->

@@ -1,0 +1,23 @@
+<select id="node_selector" name="node_url" required>
+    <option value="https://zueffc.ml" name="node_url" selected>Default node</option>
+    <option value="custom">Custom</option>
+</select>
+
+<block id="custom_node_block">
+</block>
+
+<script defer>
+    document.querySelector('#node_selector').addEventListener("change", function() {
+        block = document.querySelector("#custom_node_block");
+
+        if (this.value == "custom") {
+            block.innerHTML = `
+                <input type="url" name="node_url" placeholder="Your custom node url" aria-label="" autocomplete="url" required>
+            `;
+            block.name = "";
+        } else {
+            block.innerHTML = "";
+            block.name = "node_url"
+        }
+    });
+</script>

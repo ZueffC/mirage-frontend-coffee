@@ -1,0 +1,49 @@
+<div class="progress-bar" id="progressBar"></div>
+
+<!-- Nav -->
+<nav class="container-fluid">
+    <ul>
+        <li>
+            <a href="/" class="contrast">
+                <strong>Mirage</strong>
+            </a>
+        </li>
+    </ul>
+    <ul>
+        <% if(!it.session.id) { %>
+        <li>
+            <details role="list" dir="rtl">
+                <summary aria-haspopup="listbox" role="link" class="secondary">Auth</summary>
+                <ul role="listbox">
+                    <li><a href="/login">Sign in</a></li>
+                    <li><a href="/registration">New acc</a></li>
+                </ul>
+            </details>
+        </li>
+        <% } else { %>
+        <li>
+            <details role="list" dir="rtl">
+                <summary aria-haspopup="listbox" role="link" class="secondary">Profile</summary>
+                <ul role="listbox">
+                    <li><a href="/profile">See it</a></li>
+                    <li><a href="/packages">Packages</a></li>
+                </ul>
+            </details>
+        </li>
+        <% } %>
+
+        <li>
+            <details role="list" dir="rtl">
+                <summary aria-haspopup="listbox" role="link" class="secondary">Theme</summary>
+                <ul role="listbox">
+                    <li><a href="#" data-theme-switcher="dark">Dark</a></li>
+                    <li><a href="#" data-theme-switcher="light">Light</a></li>
+                </ul>
+            </details>
+        </li>
+    </ul>
+</nav>
+<!-- Nav -->
+
+<script type="text/javascript" src="../static/js/nav.js"></script>
+<link rel="stylesheet" href="../static/css/nav.css"> 

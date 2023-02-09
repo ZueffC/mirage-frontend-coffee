@@ -1,0 +1,69 @@
+<% layout("layouts/main") %>
+<%~ includeFile("partials/nav", it)  %>
+
+<link rel="stylesheet" href="../static/css/sweetalert2.min.css">
+
+<style>
+    .swal2-input,
+    .swal2-file,
+    .swal2-textarea {
+        box-sizing: border-box;
+        width: auto !important;
+    }
+
+    .swal2-html-container p {
+        margin-bottom: 0px;
+    }
+
+    details p {
+        margin-bottom: 0px !important;
+    }
+</style>
+
+<center style="margin-top: 120px" class="container">
+    <button onclick="addPackage()">Add package</button>
+</center>
+
+<article class="container" style="padding: 40px">
+    <% it.data.forEach(function(package){ %>
+    <details>
+        <summary><a href="<%= package.git_url %>"><%= package.name %></a></summary>
+        <p><%= package.description %></p>
+    </details>
+    <% }) %>
+</article>
+
+<script src="../static/js/sweetalert2.all.min.js"></script>
+<script async>
+    async function addPackage() {
+        const {
+            value: formValues
+        } = await Swal.fire({
+            title: 'Adding package',
+            html: '<p>Package name:</p><input id="name" type="text" class="swal2-input">' +
+                '<p>Package description:</p><textarea id="description" class="swal2-input"></textarea>' +
+                '<p>Package git (must be public):</p><input type="url" id="git" class="swal2-input">',
+            focusConfirm: true,
+            preConfirm: () => {
+                return [
+                    document.querySelector('#name').value,
+                    document.querySelector('#description').value,
+                    document.querySelector("#git").value,
+                ]
+            }
+        })
+
+        if (formValues) {
+            await fetch("../packages", {
+                method: 'POST',
+                cache: 'no-cache',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                referrerPolicy: 'no-referrer',
+                body: JSON.stringify(formValues)
+            });
+        }
+    }
+</script>
